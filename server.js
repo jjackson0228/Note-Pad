@@ -5,7 +5,7 @@ const app = express();
 const api = require("./routes/index");
 const PORT = process.env.PORT || 3001;
 
-//middleware for parsing JSON and urlencoded form data
+//middleware for parsing JSON and urlencoded form data and "/api", api
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api", api);
