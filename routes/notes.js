@@ -2,6 +2,7 @@
 const notes = require("express").Router(); // Create a new router for handling notes-related routes
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
+const path = require("path");
 const util = require("util");
 const dbPath = path.join(__dirname, "../db/db.json"); // Path to the JSON file where notes are stored
 
