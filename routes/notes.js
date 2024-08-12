@@ -1,10 +1,11 @@
 //dependencies for required path fs and uuid as well as express router to route the app.get
-const notes = require("express").Router();
+const notes = require("express").Router();// Create a new router for handling notes-related routes
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 const util = require("util");
 
-const dbPath = "./db/db.json";
+const dbPath = "./db/db.json";// Path to the JSON file where notes are stored
+
 
 notes.get("/", (req, res) => {
   // The "fs.readFile" function reads the contents of the "db.json" file.
