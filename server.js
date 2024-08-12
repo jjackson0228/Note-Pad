@@ -25,8 +25,6 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// API routes can be added here (e.g., GET, POST for notes)
-
 // Start the server
 // const PORT = process.env.PORT || 3000; //commented out because I did'nt realize I already had it up top in the const area
 app.listen(PORT, () => {

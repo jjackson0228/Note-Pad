@@ -31,8 +31,7 @@ notes.post("/", (req, res) => {
   // Destructure the title and text from the request body
   const { title, text } = req.body;
 
-  // Check if the request body exists (i.e., contains the necessary data)
-  if (req.body) {
+  // Check if the request body exists or contains the necessary data 
     // Create a new note object with a unique ID
     const addNote = {
       title,
