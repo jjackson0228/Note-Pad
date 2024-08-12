@@ -27,7 +27,7 @@ notes.post("/", (req, res) => {
   const { title, text } = req.body;
 
   if (req.body) {
-    const newNote = {
+    const addNote = {
       title,
       text,
       id: uuidv4(),
@@ -42,9 +42,9 @@ notes.post("/", (req, res) => {
         } catch (e) {
           notesArray = [];
         }
-        notesArray.push(newNote);
+        notesArray.push(addNote);
         fs.writeFile("./db/db.json", JSON.stringify(notesArray), (err) =>
-          err ? console.error(err) : res.json(newNote)
+          err ? console.error(err) : res.json(addNote)
         );
       }
     });
@@ -52,3 +52,5 @@ notes.post("/", (req, res) => {
     res.error("An error occured while attempting to add tip");
   }
 });
+//export notes from the module
+module.exports = notes;
