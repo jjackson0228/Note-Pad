@@ -6,16 +6,20 @@ const util = require("util");
 
 const dbPath = "./db/db.json";
 
-//get api route for notes
 notes.get("/", (req, res) => {
+  // The "fs.readFile" function reads the contents of the "db.json" file.
   fs.readFile(dbPath, "utf8", (err, data) => {
-    //if, else, try ,catch, loop that checks for errors and logs to console if error is present. If no error tries to parse json data
+    // This "if" block checks if there is an error while reading the file.
     if (err) {
+      // If an error occurs, log it to the console.
       console.error(err);
     } else {
+      // If no error occurs, try to parse the JSON data.
       try {
+        // The parsed data is sent back as a JSON response.
         res.json(JSON.parse(data));
       } catch (e) {
+        // If parsing fails (e.g., the JSON is malformed), send an empty string as the response.
         res.json("");
       }
     }
