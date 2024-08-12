@@ -3,8 +3,7 @@ const notes = require("express").Router(); // Create a new router for handling n
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 const util = require("util");
-
-const dbPath = "./db/db.json"; // Path to the JSON file where notes are stored
+const dbPath = path.join(__dirname, "../db/db.json"); // Path to the JSON file where notes are stored
 
 notes.get("/", (req, res) => {
   // The "fs.readFile" function reads the contents of the "db.json" file.
@@ -13,13 +12,14 @@ notes.get("/", (req, res) => {
     if (err) {
       // If an error occurs, log it to the console.
       console.error(err);
+      res.status(500).json({ error: "Failed to read notes" });
     } else {
       // If no error occurs, try to parse the JSON data.
       try {
         // The parsed data is sent back as a JSON response.
         res.json(JSON.parse(data));
       } catch (e) {
-        // If parsing fails (e.g., the JSON is malformed), send an empty string as the response.
+        // If parsing fails send an empty string as the response.
         res.json("");
       }
     }
