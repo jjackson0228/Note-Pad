@@ -68,5 +68,39 @@ notes.post("/", (req, res) => {
     }
   });
 });
+// DELETE /api/notes/:id - Deletes a note by its ID
+notes.delete("/:id", (req, res) => {
+  const noteId = req.params.id; // Extract the note ID from the request parameters
+
+  // Read the existing notes from the db.json file
+  fs.readFile(dbPath, "utf8", (err, data) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: "Failed to read notes" });
+    } else {
+      let notesArray;
+
+      // Try to parse the JSON data from the file
+      try {
+        notesArray = JSON.parse(data);
+      } catch (e) {
+        notesArray = [];
+      }
+
+      // Filter out the note with the specified ID
+      const updatedNotes = notesArray.filter((note) => note.id !== noteId);
+
+      // Write the updated notes array back to the db.json file
+      fs.writeFile(dbPath, JSON.stringify(updatedNotes), (err) => {
+        if (err) {
+          console.error(err);
+          res.status(500).json({ error: "Failed to delete note" });
+        } else {
+          res.json({ message: "Note deleted", id: noteId });
+        }
+      });
+    }
+  });
+});
 //export notes from the module
 module.exports = notes;
